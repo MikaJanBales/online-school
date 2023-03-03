@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Курсы {% endblock %}
+
+{% block content %}
+<h1>Курсы</h1><br>
+{% if courses %}
+    {% for elem in courses %}
+        <div class="alert alert-info">
+            <h3>{{ elem.title_course }}</h3>
+            <a href="{% url 'course_detail' elem.id %}" class="btn btn-info">Подробно</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Нет курсов</p>
+{% endif %}
+{% endblock %}

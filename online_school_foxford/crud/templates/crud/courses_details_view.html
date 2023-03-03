@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block title %} {{ courses.title_course }} {% endblock %}
+
+{% block content %}
+<div class="alert alert-info">
+  <h1>{{ courses.title_course }}</h1><br>
+  <p>О курсе: {{ courses.description }}</p>
+  <a href="{% url 'course_delete' courses.id %}" class="btn btn-danger">Удалить</a>
+  <a href="{% url 'course_update' courses.id %}" class="btn btn-warning">Редактировать</a>
+</div>
+{% endblock %}

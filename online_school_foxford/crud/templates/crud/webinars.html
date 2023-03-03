@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Вебинары {% endblock %}
+
+{% block content %}
+<h1>Вебинары</h1><br>
+{% if webinars %}
+    {% for elem in webinars %}
+        <div class="alert alert-info">
+            <h3>{{ elem.title_webinar }}</h3><br>
+            <p>Статус: {{ elem.status }}</p>
+            <p>Курс: {{ elem.course_id }}</p>
+            <a href="{% url 'webinar_detail' elem.id %}" class="btn btn-info">Подробно</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Нет вебинаров</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %} {{ webinars.title_webinar }} {% endblock %}
+
+{% block content %}
+<div class="alert alert-info">
+  <h1>{{ webinars.title_webinar }}</h1><br>
+  <p>Статус: {{ webinars.status }}</p>
+  <p>Курс: {{ webinars.course_id }}</p>
+  <p>О вебинаре: {{ webinars.description }}</p>
+  <a href="{% url 'webinar_delete' webinars.id %}" class="btn btn-danger">Удалить вебинар</a>
+  <a href="{% url 'webinar_update' webinars.id %}" class="btn btn-warning">Редактировать вебинар</a>
+</div>
+{% endblock %}

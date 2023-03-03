@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Редактирование вебинара {% endblock %}
+
+{% block content %}
+    <h1>Редактирование вебинара</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title_webinar }}<br>
+        {{ form.status }}<br>
+        {{ form.course_id }}<br>
+        {{ form.description }}<br>
+        <span>{{ error }}</span>
+        <button class="btn btn-success" type="submit">Редактировать вебинар</button>
+    </form>
+{% endblock %}

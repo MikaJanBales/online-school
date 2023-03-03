@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Удаление вебинара {% endblock %}
+
+{% block content %}
+    <h1>Удаление вебинара</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Удалить вебинар</button>
+    </form>
+{% endblock %}

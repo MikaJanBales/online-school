@@ -1,29 +1,44 @@
-from .models import Articles
-from django.forms import ModelForm, TextInput, DateTimeInput, Textarea
+from .models import Webinars, Courses
+from django.forms import ModelForm, TextInput, Textarea
 
 
-class ArticlesForm(ModelForm):
+class WebinarsForm(ModelForm):
     class Meta:
-        model = Articles
-        fields = ['title', 'anons', 'full_text', 'date']
+        model = Webinars
+        fields = ['title_webinar', 'status', 'course_id', 'description']
 
         widgets = {
-            'title': TextInput(attrs={
+            'title_webinar': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Название вебинара'
             }),
-            'anons': TextInput(attrs={
+            'status': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Анонс вебинара'
+                'placeholder': 'Статус вебинара'
             }),
-            'date': DateTimeInput(attrs={
+            'course_id': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата и время',
+                'placeholder': 'Название курса',
             }),
-            'full_text': Textarea(attrs={
+            'description': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Текст',
+                'placeholder': 'О вебинаре',
             }),
+        }
 
 
+class CoursesForm(ModelForm):
+    class Meta:
+        model = Courses
+        fields = ['title_course', 'description']
+
+        widgets = {
+            'title_course': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Название курса'
+            }),
+            'description': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'О курсе',
+            }),
         }
