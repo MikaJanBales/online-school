@@ -3,6 +3,10 @@ from django.forms import ModelForm, TextInput, Textarea
 
 
 class WebinarsForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['course_id'].empty_label = 'Курс не выбран'
+
     class Meta:
         model = Webinars
         fields = ['title_webinar', 'status', 'course_id', 'description']
@@ -11,14 +15,6 @@ class WebinarsForm(ModelForm):
             'title_webinar': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Название вебинара'
-            }),
-            'status': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Статус вебинара'
-            }),
-            'course_id': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Название курса',
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',

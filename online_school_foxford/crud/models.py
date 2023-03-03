@@ -55,7 +55,7 @@ class Webinars(models.Model):
 
 
 class Courses(models.Model):
-    title_course = models.CharField('Название курса', max_length=50)
+    title_course = models.CharField('Название курса', max_length=50, unique=True)
     description = models.TextField('О курсе')
 
     class Meta:

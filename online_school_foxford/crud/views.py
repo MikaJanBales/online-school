@@ -1,56 +1,30 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, ListView, CreateView
 
 from .models import Webinars, Courses
 from .forms import WebinarsForm, CoursesForm
 
 
-def webinars(request):
-    webs = Webinars.objects.all()
-    return render(request, 'crud/webinars.html', {'webinars': webs})
+class WebinarsListView(ListView):
+    model = Webinars
+    template_name = 'crud/webinars.html'
+    context_object_name = 'webinars'
 
 
-def courses(request):
-    crs = Courses.objects.all()
-    return render(request, 'crud/courses.html', {'courses': crs})
+class CoursesListView(ListView):
+    model = Courses
+    template_name = 'crud/courses.html'
+    context_object_name = 'courses'
 
 
-def webinar_create(request):
-    error = ''
-    if request.method == 'POST':
-        form = WebinarsForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('webinars')
-        else:
-            error = 'Форма была неверной'
-
-    form = WebinarsForm()
-
-    data = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'crud/webinar_create.html', data)
+class WebinarsCreateView(CreateView):
+    form_class = WebinarsForm
+    template_name = 'crud/webinar_create.html'
 
 
-def course_create(request):
-    error = ''
-    if request.method == 'POST':
-        form = CoursesForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('courses')
-        else:
-            error = 'Форма была неверной'
-
-    form = CoursesForm()
-
-    data = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'crud/course_create.html', data)
+class CoursesCreateView(CreateView):
+    form_class = CoursesForm
+    template_name = 'crud/course_create.html'
 
 
 class WebinarsDetailView(DetailView):
@@ -89,4 +63,3 @@ class CoursesDeleteView(DeleteView):
     model = Courses
     success_url = 'crud/courses'
     template_name = 'crud/course_delete.html'
-
