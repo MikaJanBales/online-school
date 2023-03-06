@@ -6,10 +6,9 @@
     <h1>Добавление вебинара</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.title_webinar }}<br>
-        {{ form.status }}<br>
-        {{ form.course_id }}<br>
-        {{ form.description }}<br>
+        {{ webinars_form.as_ul }}
+        {% csrf_token %}
+        {{ speakers_webinars_form.as_ul }}
         <span>{{ error }}</span>
         <button class="btn btn-success" type="submit">Добавить вебинар</button>
     </form>

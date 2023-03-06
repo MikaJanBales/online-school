@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('webinars', views.WebinarsListView.as_view(), name='webinars'),
     path('courses', views.CoursesListView.as_view(), name='courses'),
-    path('webinar_create', views.WebinarsCreateView.as_view(), name='webinar_create'),
+    path('webinar_create', views.webinar_create_view, name='webinar_create'),
     path('course_create', views.CoursesCreateView.as_view(), name='course_create'),
     path('webinars/<int:pk>', views.WebinarsDetailView.as_view(), name='webinar_detail'),
     path('courses/<int:pk>', views.CoursesDetailView.as_view(), name='course_detail'),

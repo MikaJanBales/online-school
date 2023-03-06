@@ -1,8 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView, DeleteView, ListView, CreateView
 
 from .models import Webinars, Courses
-from .forms import WebinarsForm, CoursesForm
+from .forms import WebinarsForm, CoursesForm, SpeakersWebinarsForm
 
 
 class WebinarsListView(ListView):
@@ -11,15 +12,37 @@ class WebinarsListView(ListView):
     context_object_name = 'webinars'
 
 
+# def webinars(request):
+#     webs = Webinars.objects.all()
+#     return render(request, 'crud/webinars.html', {'webinars': webs})
+
 class CoursesListView(ListView):
     model = Courses
     template_name = 'crud/courses.html'
     context_object_name = 'courses'
 
 
-class WebinarsCreateView(CreateView):
-    form_class = WebinarsForm
-    template_name = 'crud/webinar_create.html'
+def webinar_create_view(request):
+    if request.method == 'POST':
+        speakers_webinars_form = SpeakersWebinarsForm(request.POST, prefix="speakers_webinars")
+        webinars_form = WebinarsForm(request.POST, prefix="webinars")
+        if speakers_webinars_form.is_valid() and webinars_form.is_valid():
+            print("all validation passed")
+            webinars = webinars_form.save()
+            print(11111111111)
+            speakers_webinars_form.cleaned_data["webinar_id"] = webinars
+            print(222222222)
+
+            return HttpResponseRedirect('webinars')
+        else:
+            print("failed")
+    else:
+        speakers_webinars_form = SpeakersWebinarsForm(prefix="speakers_webinars")
+        webinars_form = WebinarsForm(prefix="webinars")
+    return render(request, 'crud/webinar_create.html', {
+        'speakers_webinars_form': speakers_webinars_form,
+        'webinars_form': webinars_form,
+    })
 
 
 class CoursesCreateView(CreateView):

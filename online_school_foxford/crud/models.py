@@ -15,8 +15,8 @@ class Speakers(models.Model):
 class SpeakersWebinars(models.Model):
     speaker_id = models.ForeignKey('Speakers', on_delete=models.CASCADE)
     webinar_id = models.ForeignKey('Webinars', on_delete=models.CASCADE)
-    date = models.DateTimeField('Начало вебинара')
-    time = models.TimeField('Длительность вебинара')
+    date = models.DateTimeField('Начало вебинара', blank=False, null=True)
+    time = models.TimeField('Длительность вебинара', null=True)
 
     class Meta:
         verbose_name = 'Дополнительная инофрмация про вебинар'
@@ -38,10 +38,11 @@ class Webinars(models.Model):
         (completed, 'Завершен'),
     ]
 
-    title_webinar = models.CharField('Название вебинара', max_length=50)
-    status = models.CharField('Статус вебинара', max_length=20, choices=status_webinar)
+    title_webinar = models.CharField('Название вебинара', max_length=50, unique=True)
+    status = models.CharField('Статус вебинара', max_length=20, choices=status_webinar, default=created)
     course_id = models.ForeignKey('Courses', on_delete=models.CASCADE)
     description = models.TextField('О вебинаре')
+    speakers = models.ManyToManyField('Speakers', through='SpeakersWebinars')
 
     class Meta:
         verbose_name = 'Вебинар'
