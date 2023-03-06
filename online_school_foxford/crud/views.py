@@ -29,9 +29,7 @@ def webinar_create_view(request):
         if speakers_webinars_form.is_valid() and webinars_form.is_valid():
             print("all validation passed")
             webinars = webinars_form.save()
-            print(11111111111)
             speakers_webinars_form.cleaned_data["webinar_id"] = webinars
-            print(222222222)
 
             return HttpResponseRedirect('webinars')
         else:
