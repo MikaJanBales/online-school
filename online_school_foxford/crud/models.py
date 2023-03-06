@@ -15,8 +15,8 @@ class Speakers(models.Model):
 class SpeakersWebinars(models.Model):
     speaker_id = models.ForeignKey('Speakers', on_delete=models.CASCADE)
     webinar_id = models.ForeignKey('Webinars', on_delete=models.CASCADE)
-    date = models.DateTimeField('Начало вебинара', blank=False, null=True)
-    time = models.TimeField('Длительность вебинара', null=True)
+    date = models.DateTimeField('Начало вебинара (yyyy-mm-dd hh:mm)', blank=False, null=True)
+    time = models.TimeField('Длительность вебинара (hh:mm:ss)', null=True)
 
     class Meta:
         verbose_name = 'Дополнительная инофрмация про вебинар'

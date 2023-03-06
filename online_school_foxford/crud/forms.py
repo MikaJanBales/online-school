@@ -1,7 +1,5 @@
-from django.contrib.admin.helpers import Fieldset
 from .models import Webinars, Courses, SpeakersWebinars, Speakers
-from django.forms import ModelForm, TextInput, Textarea, DateTimeInput, TimeInput, ModelMultipleChoiceField, \
-    CheckboxSelectMultiple
+from django.forms import ModelForm, TextInput, Textarea, ModelMultipleChoiceField, ModelChoiceField
 
 
 class SpeakersForm(ModelForm):
@@ -11,7 +9,9 @@ class SpeakersForm(ModelForm):
 
 
 class WebinarsForm(ModelForm):
-    speakers = ModelMultipleChoiceField(queryset=Speakers.objects.all())
+    speakers = ModelMultipleChoiceField(queryset=Speakers.objects.all(),
+                                        label='Преподаватели (зажимайте "ctrl" для выбора нескольких преподавателей)')
+    course_id = ModelChoiceField(queryset=Courses.objects.all(), label='Курсы')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,24 +51,6 @@ class CoursesForm(ModelForm):
 
 
 class SpeakersWebinarsForm(ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['webinar_id'].empty_label = 'Вебинар не выбран'
-
     class Meta:
         model = SpeakersWebinars
         fields = ['date', 'time']
-        # fields = ['speaker_id', 'webinar_id', 'date', 'time']
-
-        widget = {
-            'date': DateTimeInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Начало вебинара: yyyy-mm-dd hh:mm:ss'
-            }),
-            'time': TimeInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Длительность вебинара: hh:mm:ss'
-            }),
-        }
-
-
