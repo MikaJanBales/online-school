@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="alert alert-info">
-  <h1>{{ webinars.title_webinar }}</h1><br>
-  <p>Статус: {{ webinars.status }}</p>
-  <p>Курс: {{ webinars.course_id }}</p>
-  <p>О вебинаре: {{ webinars.description }}</p>
-  <a href="{% url 'webinar_delete' webinars.id %}" class="btn btn-danger">Удалить вебинар</a>
-  <a href="{% url 'webinar_update' webinars.id %}" class="btn btn-warning">Редактировать вебинар</a>
+  <h1>{{ speakers_webinars.webinar_id }}</h1><br>
+  <p>Преподаватели: {{ speakers_webinars.speaker_id }}</p>
+  <p>Начало вебинара: {{ speakers_webinars.date }}</p>
+  <p>Длительность вебинара: {{ speakers_webinars.time }}</p>
+  <a href="{% url 'webinar_delete' speakers_webinars.id %}" class="btn btn-danger">Удалить вебинар</a>
+  <a href="{% url 'webinar_update' speakers_webinars.id %}" class="btn btn-warning">Редактировать вебинар</a>
 </div>
 {% endblock %}

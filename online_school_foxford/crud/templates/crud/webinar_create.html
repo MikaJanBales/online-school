@@ -9,7 +9,6 @@
         {{ webinars_form.as_p }}
         {% csrf_token %}
         {{ speakers_webinars_form.as_p }}
-        <span>{{ error }}</span>
         <button class="btn btn-success" type="submit">Добавить вебинар</button>
     </form>
 {% endblock %}
